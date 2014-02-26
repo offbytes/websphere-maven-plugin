@@ -6,13 +6,25 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>plugin</artifactId>
+    <artifactId>websphere-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
     <name>WebSphere Maven Plugin</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <developers>
+        <developer>
+            <name>Konrad Mrozek</name>
+            <email>konrad.mrozek@gmail.com</email>
+            <url>offbytes.com</url>
+            <timezone>Europe/Warsaw</timezone>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
 
     <dependencies>
         <dependency>
@@ -81,7 +93,6 @@
         <profile>
             <id>run-its</id>
             <build>
-
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>

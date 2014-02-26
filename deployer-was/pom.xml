@@ -33,6 +33,15 @@
                 <role>Lead Developer</role>
             </roles>
         </developer>
+        <developer>
+            <name>Konrad Mrozek</name>
+            <email>konrad.mrozek@gmail.com</email>
+            <url>offbytes.com</url>
+            <timezone>Europe/Warsaw</timezone>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <dependencies>
@@ -57,6 +66,7 @@
             <groupId>com.offbytes.websphere</groupId>
             <artifactId>deployer-common</artifactId>
             <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
