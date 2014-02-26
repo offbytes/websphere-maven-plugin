@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.offbytes.websphere</groupId>
+        <artifactId>websphere-deployer-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>websphere-deployer</artifactId>
+    <packaging>jar</packaging>
+    <name>WebSphere Deployer</name>
+
+    <description>
+        Deploys your web artifacts locally or remotely to IBM WebSphere Application Server
+    </description>
+
+    <licenses>
+        <license>
+            <name>The MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Greg Peters</name>
+            <email>gregpeters00@gmail.com</email>
+            <url>drivebiz.blogspot.com</url>
+            <timezone>-5</timezone>
+            <roles>
+                <role>Lead Developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <dependencies>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ibm.ws</groupId>
+            <artifactId>admin</artifactId>
+            <version>8.5.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ibm.ws</groupId>
+            <artifactId>orb</artifactId>
+            <version>8.5.0</version>
+            <scope>provided</scope>
+        </dependency>
+      <dependency>
+        <groupId>com.offbytes.websphere</groupId>
+        <artifactId>deployer-common</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+
+</project>
