@@ -24,6 +24,9 @@ import java.util.zip.ZipOutputStream;
 public class WebSphereDeploymentService extends AbstractDeploymentService {
 
     public static final String CONNECTOR_TYPE_SOAP = "SOAP";
+    public static final String APPDEPL_PRECOMPILE_JSP = "preCompileJSPs";
+    public static final String APPDEPL_JSP_RELOADENABLED = "jspReloadEnabled";
+
 
     private AdminClient client;
     private String connectorType;
@@ -123,7 +126,7 @@ public class WebSphereDeploymentService extends AbstractDeploymentService {
         }
     }
 
-    public void installArtifact(Artifact artifact,HashMap<String,Object> options) {
+    public void installArtifact(Artifact artifact, HashMap<String,Object> options) {
         if(!isConnected()) {
             throw new DeploymentServiceException("Cannot install artifact, no connection to WebSphere Application Server exists");
         }
