@@ -6,9 +6,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>websphere-deployer</artifactId>
+    <artifactId>deployer-liberty</artifactId>
     <packaging>jar</packaging>
-    <name>WebSphere Deployer</name>
+    <name>WebSphere Liberty Profile Deployer</name>
 
     <description>
         Deploys your web artifacts locally or remotely to IBM WebSphere Liberty Profile

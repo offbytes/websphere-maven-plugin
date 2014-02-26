@@ -15,10 +15,10 @@
     </licenses>
 
     <modules>
-        <module>deployer-was</module>
       <module>deployer-common</module>
-      <!-- <module>deployer-liberty</module>
-             <module>plugin</module> -->
+      <module>deployer-was</module>
+      <!--<module>deployer-liberty</module>-->
+      <!-- <module>plugin</module> -->
     </modules>
 
 </project>
