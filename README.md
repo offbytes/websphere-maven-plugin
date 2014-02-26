@@ -1,15 +1,6 @@
-websphere-deployer-plugin
+websphere-maven-plugin
 =========================
 
-This plugin is designed with WebSphere Full Profile and Liberty Profiles in mind. The underlying architectures
-of the existing WebSphere plugins do not work well moving forward.
+This plugin is a fork of Jenkins plugin - [websphere-deployer-plugin](https://github.com/jenkinsci/websphere-deployer-plugin).
+It uses all deploying code from Jenkins plugin.
 
-We will support
-
-<ul>
-  <li>Global Security</li>
-  <li>WebSphere Liberty Profile</li>
-  <li>WebSphere Application Server</li>
-  <li>Different protocols</li>
-  <li>Different platforms</li>
-</ul>
