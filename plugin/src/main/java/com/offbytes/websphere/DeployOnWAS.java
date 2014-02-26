@@ -40,7 +40,7 @@ public class DeployOnWAS extends AbstractMojo {
     @Parameter(property = "was.host", required = true)
     private String host;
 
-    @Parameter(property = "was.port", required = true)
+    @Parameter(property = "was.port", required = true, defaultValue = "8880")
     private String port;
 
     @Parameter(property = "connectorType", required = true, defaultValue = WebSphereDeploymentService.CONNECTOR_TYPE_SOAP)
