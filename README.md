@@ -11,33 +11,39 @@ Plugin depends on some IBM libraries. They must be installed in your local repos
     * com.ibm.ws.admin.client\_\*.jar - ($WAS\_INSTALL\_ROOT/runtimes)
     ```bash 
     mvn install:install-file -Dfile=com.ibm.ws.admin.client_*.jar \
-         -DgroupId=com.ibm.ws -DartifactId=admin -Dversion=8.5.0 -Dpackaging=jar
+         -DgroupId=com.ibm.ws -DartifactId=admin -Dversion=8.5.0 \
+         -Dpackaging=jar
     ```
     * com.ibm.ws.orb\_\*.jar - ($WAS\_INSTALL\_ROOT/runtimes)
     ```bash 
     mvn install:install-file -Dfile=com.ibm.ws.orb_*.jar \
-         -DgroupId=com.ibm.ws -DartifactId=orb -Dversion=8.5.0 -Dpackaging=jar
+         -DgroupId=com.ibm.ws -DartifactId=orb -Dversion=8.5.0 \
+         -Dpackaging=jar
     ```
 1. WebSphere Liberty Profile
     * com.ibm.websphere.appserver.api.basics\_\*.jar - ($LIBERTY\_INSTALL\_ROOT/dev/api/ibm)
     ```bash 
     mvn install:install-file -Dfile=com.ibm.websphere.appserver.api.basics_*.jar \
-         -DgroupId=com.ibm.ws -DartifactId=liberty-basic -Dversion=8.5.5 -Dpackaging=jar
+         -DgroupId=com.ibm.ws -DartifactId=liberty-basic -Dversion=8.5.5 
+         -Dpackaging=jar
     ```
     * com.ibm.websphere.appserver.api.endpoint\_\*.jar - ($LIBERTY\_INSTALL\_ROOT/dev/api/ibm)
     ```bash 
     mvn install:install-file -Dfile=com.ibm.websphere.appserver.api.endpoint_*.jar \
-         -DgroupId=com.ibm.ws -DartifactId=liberty-endpoint -Dversion=8.5.5 -Dpackaging=jar
+         -DgroupId=com.ibm.ws -DartifactId=liberty-endpoint -Dversion=8.5.5 
+         -Dpackaging=jar
     ```
     * com.ibm.websphere.appserver.api.restConnector\_\*.jar - ($LIBERTY\_INSTALL\_ROOT/dev/api/ibm)
     ```bash 
     mvn install:install-file -Dfile=com.ibm.websphere.appserver.api.restConnector_*.jar \
-         -DgroupId=com.ibm.ws -DartifactId=liberty-connector -Dversion=8.5.5 -Dpackaging=jar
+         -DgroupId=com.ibm.ws -DartifactId=liberty-connector -Dversion=8.5.5 
+         -Dpackaging=jar
     ```
     * restConnector.jar - ($LIBERTY\_INSTALL\_ROOT/clients)
     ```bash 
     mvn install:install-file -Dfile=restConnector.jar \
-         -DgroupId=com.ibm.ws -DartifactId=liberty-rest-connector -Dversion=8.5.5 -Dpackaging=jar
+         -DgroupId=com.ibm.ws -DartifactId=liberty-rest-connector -Dversion=8.5.5 
+         -Dpackaging=jar
     ```
 
 ## Use Maven plugin
@@ -61,6 +67,7 @@ To use plugin you have to append dependencies to plugin definition in pom.xml. E
             <version>8.5.0</version>
         </dependency>
     </dependencies>
+</plugin>
 ```
 
 ### WebSphere Application Server deployment
