@@ -24,25 +24,25 @@ Plugin depends on some IBM libraries. They must be installed in your local repos
     * com.ibm.websphere.appserver.api.basics\_\*.jar - ($LIBERTY\_INSTALL\_ROOT/dev/api/ibm)
     ```bash 
     mvn install:install-file -Dfile=com.ibm.websphere.appserver.api.basics_*.jar \
-         -DgroupId=com.ibm.ws -DartifactId=liberty-basic -Dversion=8.5.5 
+         -DgroupId=com.ibm.ws -DartifactId=liberty-basic -Dversion=8.5.5 \
          -Dpackaging=jar
     ```
     * com.ibm.websphere.appserver.api.endpoint\_\*.jar - ($LIBERTY\_INSTALL\_ROOT/dev/api/ibm)
     ```bash 
     mvn install:install-file -Dfile=com.ibm.websphere.appserver.api.endpoint_*.jar \
-         -DgroupId=com.ibm.ws -DartifactId=liberty-endpoint -Dversion=8.5.5 
+         -DgroupId=com.ibm.ws -DartifactId=liberty-endpoint -Dversion=8.5.5 \
          -Dpackaging=jar
     ```
     * com.ibm.websphere.appserver.api.restConnector\_\*.jar - ($LIBERTY\_INSTALL\_ROOT/dev/api/ibm)
     ```bash 
     mvn install:install-file -Dfile=com.ibm.websphere.appserver.api.restConnector_*.jar \
-         -DgroupId=com.ibm.ws -DartifactId=liberty-connector -Dversion=8.5.5 
+         -DgroupId=com.ibm.ws -DartifactId=liberty-connector -Dversion=8.5.5 \ 
          -Dpackaging=jar
     ```
     * restConnector.jar - ($LIBERTY\_INSTALL\_ROOT/clients)
     ```bash 
     mvn install:install-file -Dfile=restConnector.jar \
-         -DgroupId=com.ibm.ws -DartifactId=liberty-rest-connector -Dversion=8.5.5 
+         -DgroupId=com.ibm.ws -DartifactId=liberty-rest-connector -Dversion=8.5.5 \
          -Dpackaging=jar
     ```
 
