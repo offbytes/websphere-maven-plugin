@@ -21,4 +21,6 @@ public interface DeploymentService {
     void connect() throws Exception;
     void disconnect();
     boolean isAvailable();
+
+    String getWarContextPath();
 }
