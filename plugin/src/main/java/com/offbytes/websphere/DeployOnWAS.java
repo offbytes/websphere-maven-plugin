@@ -92,6 +92,9 @@ public class DeployOnWAS extends AbstractMojo {
     @Parameter(defaultValue = "${project}")
     private MavenProject project;
 
+    @Parameter(property = "was.warContextPath")
+    private String warContextPath;
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         WebSphereDeploymentService service = new WebSphereDeploymentService();
@@ -172,6 +175,7 @@ public class DeployOnWAS extends AbstractMojo {
         service.setTargetCell(cell);
         service.setTargetNode(node);
         service.setTargetServer(server);
+        service.setWarContextPath(warContextPath);
         service.connect();
     }
 
