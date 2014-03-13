@@ -89,11 +89,14 @@ public class DeployOnWAS extends AbstractMojo {
     @Parameter(property = "was.reloading", required = true, defaultValue = "true")
     private boolean reloading;
 
-    @Parameter(defaultValue = "${project}")
-    private MavenProject project;
-
     @Parameter(property = "was.warContextPath")
     private String warContextPath;
+
+    @Parameter(property = "was.warPath")
+    private String warPath;
+
+    @Parameter(defaultValue = "${project}")
+    private MavenProject project;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -146,10 +149,11 @@ public class DeployOnWAS extends AbstractMojo {
     private Artifact createArtifact(WebSphereDeploymentService service) {
         Artifact artifact = new Artifact();
         File artifactPath = getArtifactPath();
+        String artifactExtension = artifactPath.getName().substring(artifactPath.getName().lastIndexOf('.') + 1).toLowerCase();
 
-        if (project.getPackaging().equalsIgnoreCase("ear")) {
+        if (artifactExtension.equalsIgnoreCase("ear")) {
             artifact.setType(Artifact.TYPE_EAR);
-        } else if (project.getPackaging().equalsIgnoreCase("war")) {
+        } else if (artifactExtension.equalsIgnoreCase("war")) {
             artifact.setType(Artifact.TYPE_WAR);
         }
         artifact.setPrecompile(precompile);
@@ -189,14 +193,18 @@ public class DeployOnWAS extends AbstractMojo {
     }
 
     private void generateEAR(Artifact artifact, WebSphereDeploymentService service) {
-        getLog().info("Generating EAR For New Artifact: " + artifact.getAppName());
+        getLog().info("Generating EAR From " + artifact.getSourcePath().getAbsolutePath() + " For New Artifact: " + artifact.getAppName());
         File modified = new File(artifact.getSourcePath().getParent(), artifact.getAppName() + ".ear");
         service.generateEAR(artifact, modified, earLevel);
         artifact.setSourcePath(modified);
     }
 
     private File getArtifactPath() {
-        return new File(project.getBuild().getDirectory(), project.getBuild().getFinalName() + "." + project.getPackaging());
+        if (warPath == null) {
+            return new File(project.getBuild().getDirectory(), project.getBuild().getFinalName() + "." + project.getPackaging());
+        } else {
+            return new File(warPath);
+        }
     }
 
 }

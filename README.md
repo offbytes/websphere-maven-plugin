@@ -90,4 +90,6 @@ Configuration: (__property__ - required)
 * earLevel (property: was.earLevel) - Generated EAR api level (5 for JavaEE 5, 6 for JavaEE 6) - used when deploying WAR file
 * precompile (property: was.precompile) - Precompile JSP pages
 * reloading (property: was.reloading) - JSP reloading
+* warContextPath (property: was.warContextPath) - allows to set context path of deployed WAR file
+* warPath (property: was.warPath) - allows to deploy any WAR file (not only target/finalName.war)
 
