@@ -91,5 +91,6 @@ Configuration: (__property__ - required)
 * precompile (property: was.precompile) - Precompile JSP pages
 * reloading (property: was.reloading) - JSP reloading
 * warContextPath (property: was.warContextPath) - allows to set context path of deployed WAR file
-* warPath (property: was.warPath) - allows to deploy any WAR file (not only target/finalName.war)
+* warFile (property: was.warFile) - you can specify your own path to WAR file (not only target/${finalName}.war)
+* warPath (property: was.warPath) - *deprecated* - see **warFile**
 

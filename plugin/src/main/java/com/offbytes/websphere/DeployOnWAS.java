@@ -93,7 +93,11 @@ public class DeployOnWAS extends AbstractMojo {
     private String warContextPath;
 
     @Parameter(property = "was.warPath")
+    @Deprecated
     private String warPath;
+
+    @Parameter(property = "was.warFile")
+    private String warFile;
 
     @Parameter(defaultValue = "${project}")
     private MavenProject project;
@@ -103,6 +107,8 @@ public class DeployOnWAS extends AbstractMojo {
         WebSphereDeploymentService service = new WebSphereDeploymentService();
 
         try {
+            handleDeprecated();
+            validateParameters();
             connect(service);
             Artifact artifact = createArtifact(service);
             stopArtifact(artifact.getAppName(), service);
@@ -114,6 +120,24 @@ public class DeployOnWAS extends AbstractMojo {
             throw new MojoExecutionException("Error deploying to IBM WebSphere Application Server", e);
         } finally {
             service.disconnect();
+        }
+    }
+
+    void handleDeprecated() {
+        if (this.warPath != null && this.warFile == null) {
+            this.warFile = this.warPath;
+        }
+    }
+
+    void validateParameters() {
+        fileExists("clientKeyFile", clientKeyFile);
+        fileExists("clientTrustFile", clientTrustFile);
+        fileExists("warFile", warFile);
+    }
+
+    private void fileExists(String property, String fileName) {
+        if (fileName != null && !new File(fileName).exists()) {
+            throw new IllegalArgumentException("Property " + property + ": file doesn't exist " + fileName);
         }
     }
 
