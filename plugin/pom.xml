@@ -54,6 +54,11 @@
             <artifactId>deployer-was</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.offbytes.websphere</groupId>
+            <artifactId>deployer-liberty</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
