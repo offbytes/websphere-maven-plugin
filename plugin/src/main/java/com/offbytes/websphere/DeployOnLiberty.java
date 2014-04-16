@@ -71,14 +71,14 @@ public class DeployOnLiberty extends AbstractGoal {
     }
 
     @Override
-    void handleDeprecated() {
+    protected void handleDeprecated() {
         if (this.warPath != null && this.warFile == null) {
             this.warFile = this.warPath;
         }
     }
 
     @Override
-    void validateParameters() {
+    protected void validateParameters() {
         fileExists("clientTrustFile", clientTrustFile);
         fileExists("warFile", warFile);
     }

@@ -20,6 +20,7 @@ public class JavaForkTest {
                 .classpath(System.getProperty("java.class.path"))
                 .mainClass(JavaForkTest.class.getName())
                 .property("testCode", Integer.toString(expected))
+                .stealsOutput()
                 .argument(expectedOutput);
         int actual = fork.execute();
 

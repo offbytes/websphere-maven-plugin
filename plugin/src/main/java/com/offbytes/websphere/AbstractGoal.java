@@ -18,10 +18,10 @@ public abstract class AbstractGoal extends AbstractMojo {
 
     public abstract void executeGoal() throws MojoExecutionException, MojoFailureException;
 
-    void handleDeprecated() {
+    protected void handleDeprecated() {
     }
 
-    void validateParameters() {
+    protected void validateParameters() {
     }
 
 }

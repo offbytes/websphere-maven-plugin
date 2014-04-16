@@ -43,6 +43,11 @@ public class JavaFork {
         return this;
     }
 
+    public JavaFork mainClass(Class<?> klass) {
+        this.mainClass = klass.getName();
+        return this;
+    }
+
     public JavaFork workingDirectory(String path) {
         defaultExecutor.setWorkingDirectory(new File(path));
         return this;
@@ -50,6 +55,12 @@ public class JavaFork {
 
     public JavaFork argument(String argument) {
         arguments.add(argument);
+        return this;
+    }
+
+    public JavaFork stealsOutput() {
+        outAndErr = new ByteArrayOutputStream();
+        defaultExecutor.setStreamHandler(new PumpStreamHandler(outAndErr));
         return this;
     }
 
@@ -64,8 +75,6 @@ public class JavaFork {
     public int execute() throws IOException {
         commandLine.addArgument(mainClass);
         commandLine.addArguments(arguments.toArray(new String[arguments.size()]));
-        outAndErr = new ByteArrayOutputStream();
-        defaultExecutor.setStreamHandler(new PumpStreamHandler(outAndErr));
         defaultExecutor.setExitValues(null);
         return defaultExecutor.execute(commandLine);
     }

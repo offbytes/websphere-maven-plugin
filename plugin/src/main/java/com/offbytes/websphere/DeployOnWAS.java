@@ -106,6 +106,25 @@ public class DeployOnWAS extends AbstractGoal {
 
     @Override
     public void executeGoal() throws MojoExecutionException, MojoFailureException {
+        JavaFork javaFork = new JavaFork();
+        javaFork.property("host", host)
+                .property("port", port)
+                .property("connectorType", connectorType)
+                .property("username", username)
+                .property("password", password)
+                .property("clientKeyFile", clientKeyFile)
+                .property("clientKeyPassword", clientKeyPassword)
+                .property("clientTrustFile", clientTrustFile)
+                .property("clientTrustPassword", clientTrustPassword)
+                .property("node", node)
+                .property("cell", cell)
+                .property("server", server)
+                .property("earLevel", earLevel)
+                .property("autoStart", Boolean.toString(autoStart))
+                .property("precompile", Boolean.toString(precompile))
+                .property("reloading", Boolean.toString(reloading))
+                .property("sourcePath", warPath);
+
         WebSphereDeploymentService service = new WebSphereDeploymentService();
 
         try {
@@ -124,14 +143,14 @@ public class DeployOnWAS extends AbstractGoal {
     }
 
     @Override
-    void handleDeprecated() {
+    protected void handleDeprecated() {
         if (this.warPath != null && this.warFile == null) {
             this.warFile = this.warPath;
         }
     }
 
     @Override
-    void validateParameters() {
+    protected void validateParameters() {
         fileExists("clientKeyFile", clientKeyFile);
         fileExists("clientTrustFile", clientTrustFile);
         fileExists("warFile", warFile);
@@ -225,6 +244,10 @@ public class DeployOnWAS extends AbstractGoal {
         } else {
             return new File(warFile);
         }
+    }
+
+    public static void main(String[] args) {
+
     }
 
 }
