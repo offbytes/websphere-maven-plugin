@@ -28,12 +28,14 @@ import org.jenkinsci.plugins.websphere.services.deployment.WebSphereDeploymentSe
 import java.io.File;
 import java.util.HashMap;
 
+import static com.offbytes.websphere.GoalUtils.fileExists;
+
 /**
  * Goal which deploys WAR or EAR to WebSphere application server.
  *
  */
 @Mojo(name = "deployWAS")
-public class DeployOnWAS extends AbstractMojo {
+public class DeployOnWAS extends AbstractGoal {
 
     // WAS connection settings
 
@@ -103,12 +105,10 @@ public class DeployOnWAS extends AbstractMojo {
     private MavenProject project;
 
     @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    public void executeGoal() throws MojoExecutionException, MojoFailureException {
         WebSphereDeploymentService service = new WebSphereDeploymentService();
 
         try {
-            handleDeprecated();
-            validateParameters();
             connect(service);
             Artifact artifact = createArtifact(service);
             stopArtifact(artifact.getAppName(), service);
@@ -123,22 +123,18 @@ public class DeployOnWAS extends AbstractMojo {
         }
     }
 
+    @Override
     void handleDeprecated() {
         if (this.warPath != null && this.warFile == null) {
             this.warFile = this.warPath;
         }
     }
 
+    @Override
     void validateParameters() {
         fileExists("clientKeyFile", clientKeyFile);
         fileExists("clientTrustFile", clientTrustFile);
         fileExists("warFile", warFile);
-    }
-
-    private void fileExists(String property, String fileName) {
-        if (fileName != null && !new File(fileName).exists()) {
-            throw new IllegalArgumentException("Property " + property + ": file doesn't exist " + fileName);
-        }
     }
 
     private void deployArtifact(Artifact artifact, WebSphereDeploymentService service) throws Exception {
@@ -173,7 +169,7 @@ public class DeployOnWAS extends AbstractMojo {
     private Artifact createArtifact(WebSphereDeploymentService service) {
         Artifact artifact = new Artifact();
         File artifactPath = getArtifactPath();
-        String artifactExtension = artifactPath.getName().substring(artifactPath.getName().lastIndexOf('.') + 1).toLowerCase();
+        String artifactExtension = GoalUtils.findExtension(artifactPath);
 
         if (artifactExtension.equalsIgnoreCase("ear")) {
             artifact.setType(Artifact.TYPE_EAR);
@@ -224,10 +220,10 @@ public class DeployOnWAS extends AbstractMojo {
     }
 
     private File getArtifactPath() {
-        if (warPath == null) {
+        if (warFile == null) {
             return new File(project.getBuild().getDirectory(), project.getBuild().getFinalName() + "." + project.getPackaging());
         } else {
-            return new File(warPath);
+            return new File(warFile);
         }
     }
 
