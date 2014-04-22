@@ -1,4 +1,4 @@
-package com.offbytes.websphere;
+package com.offbytes.websphere.goals;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;

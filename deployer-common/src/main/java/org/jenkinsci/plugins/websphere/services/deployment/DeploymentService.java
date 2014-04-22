@@ -22,5 +22,4 @@ public interface DeploymentService {
     void disconnect();
     boolean isAvailable();
 
-    String getWarContextPath();
 }

@@ -1,4 +1,4 @@
-package com.offbytes.websphere;
+package com.offbytes.websphere.utils;
 
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
@@ -29,6 +29,11 @@ public class JavaFork {
 
     public JavaFork property(String name, String value) {
         commandLine.addArgument("-D" + name + "=" + value);
+        return this;
+    }
+
+    public JavaFork option(String name) {
+        commandLine.addArgument("-X" + name);
         return this;
     }
 

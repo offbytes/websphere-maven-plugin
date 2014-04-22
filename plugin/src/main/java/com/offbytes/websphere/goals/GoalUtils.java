@@ -1,4 +1,4 @@
-package com.offbytes.websphere;
+package com.offbytes.websphere.goals;
 
 import java.io.File;
 
@@ -16,4 +16,5 @@ class GoalUtils {
     static String findExtension(File file) {
         return file.getName().substring(file.getName().lastIndexOf('.') + 1).toLowerCase();
     }
+
 }

@@ -1,9 +1,7 @@
-package org.jenkinsci.plugins.websphere.services.deployment;
+package com.offbytes.websphere.utils;
 
 import org.apache.commons.io.IOUtils;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.Matchers;
-import org.junit.Assert;
+import org.jenkinsci.plugins.websphere.services.deployment.Artifact;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Node;
@@ -13,35 +11,33 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasXPath;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
-/**
- * Created by kmrozek on 3/7/14.
- */
-public class WebSphereDeploymentServiceTest {
+public class EARGeneratorTest {
 
     public static final String APP_NAME = "app";
     public static final String EAR_LEVEL = "6";
 
-    private WebSphereDeploymentService service;
+    private EARGenerator earGenerator;
     private File earFile;
     private File warFile;
     private Artifact artifact;
 
     @Before
     public void initFiles() throws IOException {
-        earFile = File.createTempFile(WebSphereDeploymentServiceTest.class.getSimpleName(), ".ear");
+        earFile = File.createTempFile(EARGenerator.class.getSimpleName(), ".ear");
         earFile.deleteOnExit();
-        warFile = File.createTempFile(WebSphereDeploymentServiceTest.class.getSimpleName(), ".war");
+        warFile = File.createTempFile(EARGenerator.class.getSimpleName(), ".war");
         warFile.deleteOnExit();
 
-        service = new WebSphereDeploymentService();
-        createArtifact();
+        earGenerator = new EARGenerator();
+        earGenerator.setSourceFile(warFile);
+        earGenerator.setDestination(earFile);
+        earGenerator.setEarLevel(EAR_LEVEL);
         touchFile(warFile);
     }
 
@@ -62,7 +58,7 @@ public class WebSphereDeploymentServiceTest {
 
     @Test
     public void shouldGenerateCorrectEARWithSpecifiedContextRoot() throws IOException {
-        service.setWarContextPath("/test");
+        earGenerator.setWarContextPath("/test");
         Node applicationXml = generateEarAndReturnApplicationXml();
 
         String warFileName = warFile.getName();
@@ -84,7 +80,7 @@ public class WebSphereDeploymentServiceTest {
 
     private Node generateEarAndReturnApplicationXml() throws IOException {
         // when
-        service.generateEAR(artifact, earFile, EAR_LEVEL);
+        earGenerator.generate();
 
         // then
         ZipFile zipFile = new ZipFile(earFile);
@@ -106,14 +102,6 @@ public class WebSphereDeploymentServiceTest {
 
     private String extractFileToString(ZipFile zipFile, String name) throws IOException {
         return IOUtils.toString(zipFile.getInputStream(zipFile.getEntry(name)));
-    }
-
-    private void createArtifact() {
-        artifact = new Artifact();
-        artifact.setAppName(APP_NAME);
-        artifact.setPrecompile(false);
-        artifact.setSourcePath(warFile);
-        artifact.setType(Artifact.TYPE_WAR);
     }
 
     private void touchFile(File file) {

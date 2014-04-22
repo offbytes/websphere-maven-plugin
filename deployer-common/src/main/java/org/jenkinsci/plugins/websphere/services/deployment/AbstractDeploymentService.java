@@ -15,7 +15,6 @@ public abstract class AbstractDeploymentService implements DeploymentService {
     private String password;
     private String host;
     private String port;
-    private String warContextPath;
 
     public File getTrustStoreLocation() {
         return trustStoreLocation;
@@ -81,12 +80,4 @@ public abstract class AbstractDeploymentService implements DeploymentService {
         this.keyStorePassword = password;
     }
 
-    @Override
-    public String getWarContextPath() {
-        return warContextPath;
-    }
-
-    public void setWarContextPath(String warContextPath) {
-        this.warContextPath = warContextPath;
-    }
 }

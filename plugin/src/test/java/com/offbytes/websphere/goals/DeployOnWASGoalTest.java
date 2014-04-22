@@ -1,6 +1,6 @@
-package com.offbytes.websphere;
+package com.offbytes.websphere.goals;
 
-import org.apache.commons.lang.math.RandomUtils;
+import com.offbytes.websphere.goals.DeployOnWASGoal;
 import org.apache.maven.plugin.logging.Log;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,13 +15,13 @@ import java.util.Date;
 /**
  * Created by Konrad on 2014-03-23.
  */
-public class DeployOnWASTest {
+public class DeployOnWASGoalTest {
 
-    public final DeployOnWAS deployOnWAS = new DeployOnWAS();
+    public final DeployOnWASGoal deployOnWASGoal = new DeployOnWASGoal();
 
     @Before
     public void setUpMocks() {
-        deployOnWAS.setLog(Mockito.mock(Log.class));
+        deployOnWASGoal.setLog(Mockito.mock(Log.class));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class DeployOnWASTest {
         option("warPath", "test");
 
         // when
-        deployOnWAS.handleDeprecated();
+        deployOnWASGoal.handleDeprecated();
 
         // then
         Assert.assertEquals("test", option("warFile"));
@@ -43,7 +43,7 @@ public class DeployOnWASTest {
         option("warPath", "test2");
 
         // when
-        deployOnWAS.handleDeprecated();
+        deployOnWASGoal.handleDeprecated();
 
         // then
         Assert.assertEquals("test2", option("warFile"));
@@ -55,7 +55,7 @@ public class DeployOnWASTest {
         option("clientKeyFile", Long.toHexString(System.nanoTime()));
 
         // when
-        deployOnWAS.validateParameters();
+        deployOnWASGoal.validateParameters();
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -64,7 +64,7 @@ public class DeployOnWASTest {
         option("clientTrustFile", Long.toHexString(System.nanoTime()));
 
         // when
-        deployOnWAS.validateParameters();
+        deployOnWASGoal.validateParameters();
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -73,7 +73,7 @@ public class DeployOnWASTest {
         option("warFile", Long.toHexString(System.nanoTime()));
 
         // when
-        deployOnWAS.validateParameters();
+        deployOnWASGoal.validateParameters();
     }
 
     @Test
@@ -85,7 +85,7 @@ public class DeployOnWASTest {
         option("warFile", tempFilePath);
 
         // when
-        deployOnWAS.validateParameters();
+        deployOnWASGoal.validateParameters();
 
         // then
     }
@@ -99,9 +99,9 @@ public class DeployOnWASTest {
 
     private String option(String name) {
         try {
-            Field field = DeployOnWAS.class.getDeclaredField(name);
+            Field field = DeployOnWASGoal.class.getDeclaredField(name);
             field.setAccessible(true);
-            return field.get(deployOnWAS).toString();
+            return field.get(deployOnWASGoal).toString();
         } catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
@@ -111,9 +111,9 @@ public class DeployOnWASTest {
 
     private void option(String name, String value) {
         try {
-            Field field = DeployOnWAS.class.getDeclaredField(name);
+            Field field = DeployOnWASGoal.class.getDeclaredField(name);
             field.setAccessible(true);
-            field.set(deployOnWAS, value);
+            field.set(deployOnWASGoal, value);
         } catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
